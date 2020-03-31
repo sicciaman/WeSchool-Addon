@@ -3,6 +3,7 @@ import firebase from '../../firebase';
 import { Button, message } from 'antd';
 
 import InputText from '../../component/InputText/InputText';
+import background from '../../utility/images/background.png';
 
 
 export default class selectOptionOnFullText extends React.Component {
@@ -158,9 +159,19 @@ export default class selectOptionOnFullText extends React.Component {
                                 <InputText setField={this.setName} label="Nome" />
                                 <InputText setField={this.setSurname} label="Cognome" />
                             </div>
-                            <div style={{margin: 20}}>
-                                <h2>{this.state.exTitle}</h2>
-                                <div style={{padding: 20, border: '1px solid rgba(0,0,0,0.7)', borderRadius: 15, margin: 'auto', minWidth: 300, maxWidth: 600, lineHeight: '70px'}}>
+                            <div style={{margin: 20, padding: 50, backgroundImage: `url(${background})`}}>
+                                <h2 
+                                    style={{
+                                        backgroundColor: 'white', 
+                                        border: '1px solid #ccc', 
+                                        borderRadius: 30, 
+                                        boxShadow: '3px 3px 10px', 
+                                        display: 'inline-block', 
+                                        padding: 5}}
+                                    >
+                                        {this.state.exTitle}
+                                    </h2>
+                                <div style={{padding: 20, border: '1px solid #ccc', borderRadius: 15, boxShadow: '3px 3px 10px', margin: 'auto', minWidth: 300, maxWidth: 600, lineHeight: '70px', backgroundColor: 'white'}}>
                                     {
                                         !this.state.opt.length ? (<p>Loading . . .</p>) : null
                                     }

@@ -59,7 +59,7 @@ export default () => {
                 <Route path="/">
                     <Header />
                     <div> 
-                        <div style={{paddingTop:80, display: 'flex', flexWrap: 'wrap'}}>
+                        <div style={{paddingTop:100, display: 'flex', flexWrap: 'wrap'}}>
                         {
                             loaded && cards.map((card, i) => {
                                 return(
@@ -69,7 +69,7 @@ export default () => {
                                         </Link>
                                         <CopyOutlined
                                             onClick={() => copyLink(card.ID)}
-                                            style ={{position: 'absolute', fontSize: 25, margin: 5, top: 13, right: 40, color: '#1890ff', backgroundColor: 'white', cursor: 'pointer'}} 
+                                            style ={{position: 'absolute', boxShadow: '2px 2px 2px #000', fontSize: 30, margin: 5, padding: 5, top: 8, right: 40, color: '#fe654f', borderRadius: 40, backgroundColor: 'white', cursor: 'pointer'}} 
                                         />
                                     </div>
                                 );

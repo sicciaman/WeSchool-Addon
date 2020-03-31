@@ -5,9 +5,11 @@ import {BrowserRouter as Router, Switch, Route, Link, useRouteMatch} from "react
 import Card from '../../component/Card/Card';
 import SelectBoxOnText from './selectBoxOnText';
 import Results from './showResults';
-import { DeleteOutlined, PlusCircleOutlined, BarChartOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusCircleOutlined, BarChartOutlined} from '@ant-design/icons';
 import { Popconfirm, message } from 'antd';
 import { AuthContext } from "../../component/Auth/Auth";
+
+import edit from '../../utility/images/edit.png';
 
 export default () => {
     const [cards, setCards] = useState([]); // List of exercises
@@ -82,8 +84,11 @@ export default () => {
                     <div style={{position: 'relative'}}>
                         {
                             loaded &&
-                            <div style={{position: 'fixed', right: 4, top: 100, color: '#1890ff', textAlign: 'center'}}>
-                                <Link to={`${match.url}/newExercise/${lastCardID+1}`}>
+                            <div style={{position: 'fixed', right: 4, top: 100, textAlign: 'center'}}>
+                                <Link 
+                                    style={{color: '#fe654f'}}
+                                    to={`${match.url}/newExercise/${lastCardID+1}`}
+                                >
                                     <span>
                                         <PlusCircleOutlined 
                                             style={{fontSize: 45}}    
@@ -99,11 +104,11 @@ export default () => {
                                 return(
                                     <div key={i} style={{position: 'relative', justifyContent:'center'}}>
                                         <Link to={`${match.url}/exercise/${card.ID}`}>
-                                            <Card title={card.exTitle} subtitle={card.textArea} />              
+                                            <Card title={card.exTitle} subtitle={card.textArea} icon={edit} />              
                                         </Link>
                                         <Link to={`${match.url}/results/${card.ID}`}>
                                             <BarChartOutlined 
-                                                style ={{position: 'absolute', fontSize: 37, margin: 5, top: 0, left: 30, color: '#1890ff', backgroundColor: 'white', cursor: 'pointer'}} 
+                                                style ={{position: 'absolute', boxShadow: '2px 2px 2px #000', fontSize: 30, margin: 5, padding: 8, top: 0, left: 30, color: '#fff', backgroundColor: '#fe654f', borderRadius: 40, cursor: 'pointer'}} 
                                             />
                                         </Link>
                                         <Popconfirm
@@ -113,7 +118,7 @@ export default () => {
                                             cancelText="No"
                                         >
                                             <DeleteOutlined  
-                                                style ={{position: 'absolute', fontSize: 25, margin: 5, top: 13, right: 30, color: 'red', backgroundColor: 'white', cursor: 'pointer'}} 
+                                                style ={{position: 'absolute', boxShadow: '2px 2px 2px #000', fontSize: 22, margin: 5, padding: 5, top: 6, right: 30, color: '#fe654f', backgroundColor: 'white', borderRadius: 40, cursor: 'pointer'}} 
                                             />
                                         </Popconfirm>
                                     </div>

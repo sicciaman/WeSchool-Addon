@@ -15,7 +15,7 @@ export default () => {
             <a
                 href="/"
             >
-                <span>
+                <span style={{color: '#fe654f', textAlign: 'center'}}>
                     <HomeOutlined style={{fontSize: 45}}/>
                     <p>Home</p>
                 </span>
