@@ -51,7 +51,7 @@ export default ({user}) => {
                                 name: res[user]["Utente"],
                                 rightAnswers: res[user]["Giuste"],
                                 wrongAnswers: res[user]["Errori"],
-                                rate: (res[user]["Giuste"]*100)/tot // Calculate success ratio
+                                rate: parseFloat((res[user]["Giuste"]*100)/tot).toFixed(2) // Calculate success ratio
                             });
                         })
                         setResults(temp_res); // Set status
@@ -70,7 +70,7 @@ export default ({user}) => {
 
     return(
         <div>
-            <h1>Risultati</h1>
+            <h1 style={{color: '#fff'}}>Risultati</h1>
             <Table 
                 columns={columns} 
                 dataSource={results} 

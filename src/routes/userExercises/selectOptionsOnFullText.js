@@ -3,8 +3,6 @@ import firebase from '../../firebase';
 import { Button, message } from 'antd';
 
 import InputText from '../../component/InputText/InputText';
-import background from '../../utility/images/background.png';
-
 
 export default class selectOptionOnFullText extends React.Component {
     pieces = []; // Array of string generated from split functions based on position of & in text area
@@ -155,11 +153,11 @@ export default class selectOptionOnFullText extends React.Component {
                             </>
                         ) : (
                             <>
-                            <div style={{display: "flex", margin: 20}}>
+                            <div style={{display: "flex", padding: 20}}>
                                 <InputText setField={this.setName} label="Nome" />
                                 <InputText setField={this.setSurname} label="Cognome" />
                             </div>
-                            <div style={{margin: 20, padding: 50, backgroundImage: `url(${background})`}}>
+                            <div style={{margin: 20, padding: 50}}>
                                 <h2 
                                     style={{
                                         backgroundColor: 'white', 

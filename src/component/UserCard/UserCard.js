@@ -2,10 +2,9 @@ import React from 'react';
 
 import UserDash from '../../routes/userDash';
 
-
 export default () => {
     return (
-        <div style={{paddingTop: 0, width: '100%', textAlign: 'center'}}>
+        <div style={{width: '100%', textAlign: 'center', backgroundColor: '#2b2924'}}>
             <UserDash />
         </div>
     )

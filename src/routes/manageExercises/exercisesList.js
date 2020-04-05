@@ -6,18 +6,42 @@ import Card from '../../component/Card/Card';
 import SelectBoxOnText from './selectBoxOnText';
 import Results from './showResults';
 import { DeleteOutlined, PlusCircleOutlined, BarChartOutlined} from '@ant-design/icons';
-import { Popconfirm, message } from 'antd';
+import { Popconfirm, message, Button } from 'antd';
 import { AuthContext } from "../../component/Auth/Auth";
 
 import edit from '../../utility/images/edit.png';
+
+const defaultButton = {
+    color: '#fff',
+    backgroundImage: 'linear-gradient(to right top, #faad148f, #ff7875, #ff4d4f, rgb(254, 101, 79))',
+    border: 'none',
+    fontSize: '1.5em',
+    width: 250,
+    height: 55,
+    fontWeight: 'bold'
+}
+
+const activeButton = {
+    color: '#fff',
+    backgroundImage: 'linear-gradient(to right top, #faad148f, #ff7875, #ff4d4f, rgb(254, 101, 79))',
+    border: 'none',
+    fontSize: '1.5em',
+    width: 270,
+    height: 60,
+    fontWeight: 'bold'
+}
 
 export default () => {
     const [cards, setCards] = useState([]); // List of exercises
     const [lastCardID, setLastCardID] = useState(0); // ID of the last Exercise
     const [loaded, setLoaded] = useState(false); // Boolean flag for updating status of data
+    const [addExerciseButton, setAddExerciseButton] = useState(false);
     const {currentUser} = useContext(AuthContext); // Get current user logged
     let match = useRouteMatch();
 
+    const sortId = (prev, next) => {
+        return prev - next;
+    }
 
     const fetchCards = () => {
         try {
@@ -30,11 +54,16 @@ export default () => {
                         
                         let c = Object.values(res);
                         let keys = Object.keys(res);
+                        let numericalKeys = [];
                         c.forEach((card, i) => {
                             card.ID = parseInt(keys[i].substring(2)); // Cut part of string "ex" and take the ID2
-                        });  
+                            numericalKeys.push(card.ID)
+                        }); 
+                        console.log(numericalKeys) 
+                        numericalKeys.sort(sortId);
+                        console.log(numericalKeys) 
                         setCards(c); // Save Exercise in Card state    
-                        setLastCardID(parseInt(keys[keys.length-1].substring(2))); // Set ID of last card
+                        setLastCardID(numericalKeys[keys.length-1]); // Set ID of last card
                     }
                 }); 
                 setLoaded(true);
@@ -81,24 +110,8 @@ export default () => {
                 <Route path={`${match.url}/newExercise/:id`} render={(props) => <SelectBoxOnText user={currentUser.uid} newEx={true} {...props} />} />
                 <Route path={`${match.url}/results/:id`} render={(props) => <Results user={currentUser.uid} {...props} />} />
                 <Route path="/">
-                    <div style={{position: 'relative'}}>
-                        {
-                            loaded &&
-                            <div style={{position: 'fixed', right: 4, top: 100, textAlign: 'center'}}>
-                                <Link 
-                                    style={{color: '#fe654f'}}
-                                    to={`${match.url}/newExercise/${lastCardID+1}`}
-                                >
-                                    <span>
-                                        <PlusCircleOutlined 
-                                            style={{fontSize: 45}}    
-                                        />
-                                        <p>Nuovo Esercizio</p>
-                                    </span>
-                                </Link>
-                            </div>
-                        }     
-                        <div style={{paddingTop:80, display: 'flex', flexWrap: 'wrap'}}>
+                    <div style={{position: 'relative'}}> 
+                        <div style={{paddingTop:80, marginBottom: 100, display: 'flex', flexWrap: 'wrap'}}>
                         {
                             loaded && cards.map((card, i) => {
                                 return(
@@ -125,11 +138,29 @@ export default () => {
                                 );
                             })
                         }
-                        </div>
+                        </div>              
+                        {   
+                            loaded && 
+                            <div               
+                                style={{position: 'fixed', bottom: 0, height: 100, padding: 25, width: '100%', backgroundImage: 'linear-gradient(to top, #2b2924, #2b2924, #2b2924, #2b2924d9)'}}
+                            >
+                                <Link 
+                                    style={{color: '#fe654f'}}
+                                    to={`${match.url}/newExercise/${lastCardID+1}`}
+                                >
+                                    <Button
+                                        onMouseEnter={() => setAddExerciseButton(true)}
+                                        onMouseLeave={() => setAddExerciseButton(false)}
+                                        style={addExerciseButton ?  activeButton : defaultButton}                               
+                                    >
+                                        Aggiungi Esercizio
+                                    </Button>
+                                </Link>
+                            </div>
+                        }   
                     </div>
                 </Route>    
-            </Switch>
-           
+            </Switch>        
         </Router>
     );
 }

@@ -5,6 +5,17 @@ import firebase from '../../firebase';
 import TextArea from '../../component/TextArea/TextArea';
 import InputOption from '../../component/InputOption/InputOption';
 
+const normalButton = {
+    backgroundColor: '#fe654f',
+    border: 'none',
+    color: '#fff'
+}
+
+const activeButton = {
+    backgroundColor: '#fe654fc7',
+    border: 'none',
+    color: '#fff'
+}
 
 export default class selectBoxOnText extends React.Component {
     _optionsArray = []; 
@@ -24,7 +35,9 @@ export default class selectBoxOnText extends React.Component {
             optionsArray: [], // Collections of options based on countSymbol
             exTitle: '', // Exercise Title
             edited: false, // Boolean that indicates that text Area has been edited
-            exID: 0 // Default exercise ID
+            exID: 0, // Default exercise ID
+            saveTextButton: false,
+            saveOptionsButton: false
         }
 
         this.setRadio = this.setRadio.bind(this);
@@ -177,22 +190,27 @@ export default class selectBoxOnText extends React.Component {
             <>  
                 <div>   
                     <div>
-                        <label htmlFor="title"><strong>Consegna</strong></label>
+                        <label style={{color: '#fff'}} htmlFor="title"><strong>Consegna</strong></label>
                         <input value={this.state.exTitle} id="title" onChange={this.setExTitle} style={{margin: 10, minWidth: 400}} />
                     </div>
                 </div>
                 <TextArea text={this.state.textArea} onChange={(text) => this.setTextArea(text)} />
                 <div style={{position: 'relative'}}>
-                    <Button onClick={this.updateText} type="primary">
+                    <Button 
+                        onClick={this.updateText} 
+                        onMouseEnter={() => this.setState({saveTextButton: true})}
+                        onMouseLeave={() => this.setState({saveTextButton: false})}
+                        style={this.state.saveTextButton ? normalButton : activeButton}
+                    >
                         Salva
                     </Button>
                 </div>
                 <hr style={{margin: 25}} />
                 {
                     this.state.countSymbol ? (
-                        <div>Simbolo presente</div>
+                        <div style={{color: '#fff'}}>Simbolo presente</div>
                     ) : (
-                        <div>Inserisci il simbolo <strong>&</strong> per aggiungere le opzioni</div>
+                        <div style={{color: '#fff'}}>Inserisci il simbolo <strong>&</strong> per aggiungere le opzioni</div>
                     )
                 }              
                 {   
@@ -208,7 +226,12 @@ export default class selectBoxOnText extends React.Component {
                             <div>
                                 <hr style={{margin: 25}} />
                                 <div style={{position: 'relative', marginBottom: 50}}>
-                                    <Button onClick={this.updateOptions} type="primary">
+                                    <Button 
+                                        onClick={this.updateOptions} 
+                                        onMouseEnter={() => this.setState({saveOptionsButton: true})}
+                                        onMouseLeave={() => this.setState({saveOptionsButton: false})}
+                                        style={this.state.saveOptionsButton ? normalButton : activeButton}
+                                    >
                                         Salva Opzioni
                                     </Button>
                                 </div>

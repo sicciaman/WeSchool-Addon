@@ -7,7 +7,7 @@ export default () => {
     return (
         <>
             <Header />
-            <div style={{paddingTop: 100, width: '100%', textAlign: 'center'}}>
+            <div style={{paddingTop: 100, width: '100%', textAlign: 'center', backgroundColor: '#2b2924'}}>
                 <ManageDash />
             </div>
         </>

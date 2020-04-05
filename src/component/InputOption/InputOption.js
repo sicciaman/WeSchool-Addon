@@ -29,7 +29,7 @@ export default class inputOption extends React.Component {
 
         return(
             <div style={{margin: 15}}>
-                <h4>Opzione {index+1}</h4>
+                <h4 style={{color: '#fff'}}>Opzione {index+1}</h4>
                 <Radio.Group value={this.props.opt.rightAnswer} onChange={this.setRadio}>
                     <Radio style={radioStyle} value={1}>
                         <Input onChange={e => this.setInput(e, 1)} style={{ width: 100, marginLeft: 10 }} />

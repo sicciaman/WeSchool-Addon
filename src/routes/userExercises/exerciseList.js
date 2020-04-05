@@ -58,24 +58,22 @@ export default () => {
                 <Route path={`${match.url}/exercise/:id`} render={(props) => <SelectOptionsOnFullText id={id} user={userID} {...props} />} />
                 <Route path="/">
                     <Header />
-                    <div> 
-                        <div style={{paddingTop:100, display: 'flex', flexWrap: 'wrap'}}>
-                        {
-                            loaded && cards.map((card, i) => {
-                                return(
-                                    <div key={i} style={{position: 'relative', justifyContent:'center'}}>
-                                        <Link  to={`${match.url}/exercise/${card.ID}`}>
-                                            <Card title={card.exTitle} subtitle={card.textArea} />              
-                                        </Link>
-                                        <CopyOutlined
-                                            onClick={() => copyLink(card.ID)}
-                                            style ={{position: 'absolute', boxShadow: '2px 2px 2px #000', fontSize: 30, margin: 5, padding: 5, top: 8, right: 40, color: '#fe654f', borderRadius: 40, backgroundColor: 'white', cursor: 'pointer'}} 
-                                        />
-                                    </div>
-                                );
-                            })
-                        }
-                        </div>
+                    <div style={{paddingTop:100, display: 'flex', flexWrap: 'wrap'}}>
+                    {
+                        loaded && cards.map((card, i) => {
+                            return(
+                                <div key={i} style={{position: 'relative', justifyContent:'center'}}>
+                                    <Link  to={`${match.url}/exercise/${card.ID}`}>
+                                        <Card title={card.exTitle} subtitle={card.textArea} />              
+                                    </Link>
+                                    <CopyOutlined
+                                        onClick={() => copyLink(card.ID)}
+                                        style ={{position: 'absolute', boxShadow: '2px 2px 2px #000', fontSize: 30, margin: 5, padding: 5, top: 8, right: 40, color: '#fe654f', borderRadius: 40, backgroundColor: 'white', cursor: 'pointer'}} 
+                                    />
+                                </div>
+                            );
+                        })
+                    }
                     </div>
                 </Route>    
             </Switch>         
