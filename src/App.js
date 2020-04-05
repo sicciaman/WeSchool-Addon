@@ -18,7 +18,6 @@ export default function App() {
   
   
   useEffect(() => {
-    document.title = "WeSchool Addon" // Change app title showed in Browser tab
     let root = document.getElementById('root');
     root.style.height = '100vh';
     root.style.backgroundColor = '#2b2924'
