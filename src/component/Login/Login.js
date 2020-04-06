@@ -2,21 +2,33 @@ import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Form, Input, Button} from "antd";
 import app from "../../firebase";
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { AuthContext } from "../Auth/Auth";
 
-const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
+const defaultButton = {
+    color: '#fff',
+    backgroundImage: 'linear-gradient(to right top, #faad148f, #ff7875, #ff4d4f, rgb(254, 101, 79))',
+    border: 'none',
+    fontSize: '1.5em',
+    width: 250,
+    height: 55,
+    fontWeight: 'bold'
+}
 
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
-
+const activeButton = {
+    color: '#fff',
+    backgroundImage: 'linear-gradient(to right top, #faad148f, #ff7875, #ff4d4f, rgb(254, 101, 79))',
+    border: 'none',
+    fontSize: '1.5em',
+    width: 270,
+    height: 60,
+    fontWeight: 'bold'
+}
 
 const Login = ({ history }) => {
     const [fail, setFail] = useState(false);
+    const [buttonActive, setButtonActive] = useState(false);
 
     const handleLogin = useCallback(
         async event => {
@@ -43,32 +55,41 @@ const Login = ({ history }) => {
     }
 
     return (
-        <div style={{width: 450, textAlign: 'center', margin: 'auto', paddingTop: 90}}>
-            <h2 style={{marginLeft: 135}}>Login</h2>
+        <div style={{width: 350, textAlign: 'center', margin: 'auto', paddingTop: 90}}>
+            <h1 style={{color: '#fff'}}>Login</h1>
             <Form
-                {...layout}
-                name="basic"
+                name="normal_login"
+                className="login-form"
                 onFinish={handleLogin}
                 onFinishFailed={loginFailed}
             >
                 <Form.Item
-                    label="Email"
                     name="email"
                     rules={[{ required: true, message: 'Inserisci la tua e-mail!' }]}
                 >
-                    <Input />
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email"/>
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
-                    name="password"
+                    name="password"                   
                     rules={[{ required: true, message: 'Inserisci la tua password!' }]}
                 >
-                    <Input.Password />
+                    <Input 
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
                 </Form.Item>
 
-                <Form.Item {...tailLayout}>
-                    <Button type="primary" htmlType="submit">
+                <Form.Item>
+                    <Button 
+                        onMouseEnter={() => setButtonActive(true)}
+                        onMouseLeave={() => setButtonActive(false)}
+                        style={buttonActive ? activeButton : defaultButton}
+                        type="primary" 
+                        htmlType="submit" 
+                        className="login-form-button"
+                    >
                         Accedi
                     </Button>
                 </Form.Item>

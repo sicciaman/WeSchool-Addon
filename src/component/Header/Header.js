@@ -10,7 +10,8 @@ export default () => {
             position: 'fixed',
             top: 15,
             right: 30,
-            color: '#1890ff'
+            color: '#1890ff',
+            zIndex: 1000
         }}>
             <a
                 href="/"
