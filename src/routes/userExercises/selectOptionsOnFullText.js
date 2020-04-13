@@ -145,12 +145,12 @@ export default class selectOptionOnFullText extends React.Component {
                 {
                     this.state.endedTest ? 
                         (   
-                            <>
-                            <h2>Test Completato!</h2>
+                            <div style={{color: '#fff'}}>
+                            <h2 style={{color: '#fff'}}>Test Completato!</h2>
                             <hr style={{margin: 20}} />
-                            <h4>Risposte CORRETTE:</h4> <p style={{fontSize: 50}}>{this.userRecap.Giuste}</p>
-                            <h4>Risposte ERRATE:</h4> <p style={{fontSize: 50}}>{this.userRecap.Errori}</p>
-                            </>
+                            <h4 style={{color: '#fff'}}>Risposte CORRETTE:</h4> <p style={{fontSize: 50}}>{this.userRecap.Giuste}</p>
+                            <h4 style={{color: '#fff'}}>Risposte ERRATE:</h4> <p style={{fontSize: 50}}>{this.userRecap.Errori}</p>
+                            </div>
                         ) : (
                             <>
                             <div style={{display: "flex", padding: 20}}>
